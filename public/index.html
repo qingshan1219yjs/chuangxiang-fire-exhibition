@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#101111">
+  <meta name="description" content="浏览创想消防作品展的 25 件参展作品，为喜欢的作品投票。">
+  <title>创想消防作品展</title>
+  <link rel="stylesheet" href="/site.css?v=5">
+  <script type="module" src="/gallery.js?v=5"></script>
+</head>
+<body>
+  <a class="skip" href="#gallery">跳到作品</a>
+  <header class="masthead">
+    <a class="brand" href="/" aria-label="创想消防作品展首页"><span class="brand-mark" aria-hidden="true"></span><span>创想消防</span></a>
+    <nav aria-label="主导航"><a href="#gallery">作品展厅</a><button class="text-button share" type="button" id="share-link">分享链接 <span aria-hidden="true">↗</span></button></nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="exhibition-title">
+      <div class="hero-copy">
+        <p class="overline">消防安全创客大赛</p>
+        <h1 id="exhibition-title">创想消防<span>作品展</span></h1>
+        <p class="hero-description">从插画、摄影到漫画与书法。看完展，为你喜欢的作品投票。</p>
+        <a class="button primary hero-cta" href="#gallery">浏览 25 件作品 <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-art" id="featured-carousel" role="region" aria-roledescription="轮播" aria-label="封面作品">
+        <button class="hero-slide" id="featured-art" type="button" aria-label="查看 01 号作品《别等火星长大》大图">
+          <span class="art-previews" id="featured-previews"><img src="/art/thumb-01.webp?v=2" alt="" fetchpriority="high"></span>
+          <span class="hero-caption"><span id="featured-title">别等火星长大</span><span class="open-arrow" aria-hidden="true">↗</span></span>
+        </button>
+        <div class="hero-carousel-controls" id="featured-controls" role="group" aria-label="切换封面" hidden>
+          <button id="featured-prev" type="button" aria-label="上一张封面">‹</button>
+          <span class="hero-position" aria-hidden="true"><span id="featured-position">01</span> / <span id="featured-total">25</span></span>
+          <button id="featured-next" type="button" aria-label="下一张封面">›</button>
+          <button id="featured-toggle" type="button" aria-label="暂停自动轮播" title="暂停自动轮播"></button>
+        </div>
+        <span class="visually-hidden" id="featured-status" role="status"></span>
+      </div>
+    </section>
+
+    <section id="gallery" class="gallery-section" aria-labelledby="gallery-title">
+      <div class="gallery-heading">
+        <div><h2 id="gallery-title">作品展厅</h2><p>点击作品查看完整展板。</p></div>
+        <span id="gallery-count" class="gallery-count" aria-live="polite">25 件作品</span>
+      </div>
+      <div class="filters" id="filters" aria-label="按作品类型筛选"></div>
+      <div class="works" id="works"></div>
+      <noscript>请启用 JavaScript，以浏览作品和提交选票。</noscript>
+    </section>
+  </main>
+
+  <footer class="page-footer"><span>创想消防作品展</span><a href="/admin">管理员入口</a></footer>
+
+  <aside class="ballot-dock" aria-label="选票">
+    <div class="dock-copy"><strong id="selected-count">已选 0 / 3 件</strong><span id="dock-note">每个学号仅可提交一次</span></div>
+    <button class="button primary" type="button" id="review-ballot" disabled>查看选票 <span aria-hidden="true">→</span></button>
+  </aside>
+
+  <dialog class="art-dialog" id="art-dialog" aria-labelledby="art-title">
+    <div class="dialog-top"><div><p id="art-meta" class="art-meta"></p><h2 id="art-title"></h2></div><button class="icon-button" data-close type="button" aria-label="关闭大图">×</button></div>
+    <div class="art-panels" id="art-panels" role="group" aria-label="本作品的展板" hidden></div>
+    <div class="art-stage" id="art-stage"><img id="art-image" alt=""></div>
+    <div class="art-controls">
+      <div class="stepper"><button class="icon-button" type="button" id="prev-art" aria-label="上一件作品">←</button><button class="icon-button" type="button" id="next-art" aria-label="下一件作品">→</button></div>
+      <button class="button secondary" type="button" id="zoom-art" aria-pressed="false">放大</button>
+      <button class="button primary" type="button" id="select-art">加入选票</button>
+    </div>
+  </dialog>
+
+  <dialog class="ballot-dialog" id="ballot-dialog" aria-labelledby="ballot-title">
+    <div class="dialog-top"><div><p class="art-meta">人气投票</p><h2 id="ballot-title">确认你的选票</h2></div><button class="icon-button" data-close type="button" aria-label="关闭选票">×</button></div>
+    <form class="ballot-content" id="ballot-form">
+      <ul class="ballot-list" id="ballot-list"></ul>
+      <label for="student-id">学号</label>
+      <input id="student-id" name="studentId" type="text" placeholder="输入你的学号" maxlength="64" autocomplete="off" autocorrect="off" spellcheck="false" required>
+      <p class="form-hint">每个学号仅可提交一次，最多选 3 件作品，每件计 1 票。学号仅管理员可查看。</p>
+      <p class="form-error" id="ballot-error" role="alert" hidden></p>
+      <button class="button primary wide" id="submit-ballot" type="submit">提交选票</button>
+    </form>
+    <div class="ballot-content success" id="ballot-success" hidden><p class="success-mark" aria-hidden="true">✓</p><h3>选票已提交</h3><p>感谢你为创想消防作品展投票。</p><button class="button primary wide" data-close type="button">返回展厅</button></div>
+  </dialog>
+
+  <p class="toast" id="toast" role="status" hidden></p>
+</body>
+</html>

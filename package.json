@@ -1,0 +1,11 @@
+{
+  "name": "chuangxiang-fire-exhibition",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/preview.mjs"
+  }
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#101111">
+  <title>投票管理 · 创想消防作品展</title>
+  <link rel="stylesheet" href="/site.css?v=5">
+  <script type="module" src="/admin.js?v=5"></script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>创想消防</span></a>
+    <nav aria-label="主导航"><a href="/">返回展厅</a></nav>
+  </header>
+  <main class="admin-main">
+    <h1>投票管理</h1>
+    <p id="admin-message" class="admin-message" role="status">正在加载统计…</p>
+    <a class="button primary admin-sign-in" id="sign-in" href="/signin-with-chatgpt?return_to=%2Fadmin" target="_top" hidden>使用管理员账号登录</a>
+    <form class="admin-section admin-password" id="admin-password-form" hidden>
+      <label for="admin-password">管理员密码</label>
+      <input type="password" id="admin-password" name="password" placeholder="输入管理员密码" autocomplete="current-password" maxlength="128" required>
+      <button class="button primary wide" id="admin-unlock" type="submit">验证密码</button>
+    </form>
+
+    <div class="admin-dashboard" id="dashboard" hidden>
+      <div class="admin-actions">
+        <span id="voting-state"></span>
+        <button class="button secondary" id="toggle-voting" type="button"></button>
+        <button class="button secondary" id="reload" type="button">刷新数据</button>
+      </div>
+      <div class="admin-cards" aria-label="投票概况">
+        <div class="admin-card"><span>提交选票</span><strong id="ballot-count">0</strong></div>
+        <div class="admin-card"><span>不同学号</span><strong id="student-count">0</strong></div>
+        <div class="admin-card"><span>作品总票数</span><strong id="selection-count">0</strong></div>
+      </div>
+
+      <section class="admin-section" aria-labelledby="result-title">
+        <div class="admin-section-heading"><h2 id="result-title">作品得票</h2></div>
+        <div class="table-wrap"><table><thead><tr><th scope="col">编号</th><th scope="col">作品</th><th scope="col" class="tally">票数</th></tr></thead><tbody id="results"></tbody></table></div>
+      </section>
+
+      <section class="admin-section" aria-labelledby="records-title">
+        <div class="admin-section-heading"><h2 id="records-title">投票明细</h2><a class="button primary" href="/api/admin/export.csv" download="exhibition-ballots.csv">导出 CSV</a></div>
+        <div class="table-wrap"><table><thead><tr><th scope="col">选票编号</th><th scope="col">提交时间（北京时间）</th><th scope="col">学号</th><th scope="col">作品编号</th></tr></thead><tbody id="records"></tbody></table></div>
+        <button class="button secondary admin-sign-in" id="older" type="button" hidden>加载更早记录</button>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
